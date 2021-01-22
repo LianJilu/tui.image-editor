@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Image Editor</title>
+    <link
+      type="text/css"
+      href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css"
+      rel="stylesheet"
+    />
+    <link type="text/css" href="../dist/tui-image-editor.css" rel="stylesheet" />
+    <style>
+      /* @import url(http://fonts.googleapis.com/css?family=Noto+Sans); */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tui-image-editor-container"></div>
+    <script
+      type="text/javascript"
+      src="https://api-storage.cloud.toast.com/v1/AUTH_e18353c4ea5746c097143946d0644e61/toast-ui-cdn/tui-image-editor/v3.11.0/example/fabric-v4.2.0.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"
+    ></script>
+    <script type="text/javascript" src="../dist/tui-image-editor.js"></script>
+    <script type="text/javascript" src="./js/theme/white-theme.js"></script>
+    <script type="text/javascript" src="./js/theme/black-theme.js"></script>
+    <script>
+      // Image editor
+      var locale = {
+        Crop: '裁剪',
+        Delete: '删除',
+        'Delete-all': '删除所有',
+        Load: '选择图片',
+        Download: '下载图片',
+        Sharpen: '锐化',
+        Emboss: '浮雕',
+        Blur: '模糊',
+        Sepia: '深褐色',
+        Sepia2: '深褐色2',
+        Invert: '反色',
+        Grayscale: '灰度化',
+        'Remove White': '移除白色',
+        Threshold: '阈值',
+        Distance: '距离',
+        Filter: '滤镜',
+        'Color Filter': '颜色滤镜',
+        Pixelate: '像素化',
+        Noise: '噪点',
+        Brightness: '亮度',
+        Redo: '重做',
+        Undo: '撤销',
+        Reset: '重设',
+        Flip: '翻转',
+        Rotate: '旋转',
+        Draw: '绘画',
+        Shape: '图形',
+        Icon: '图标',
+        Text: '文字',
+        Mask: '遮罩',
+        Apply: '应用',
+        Cancel: '取消',
+        Custom: '自定义',
+        Square: '正方形',
+        'Load Mask Image': '选择遮罩图片',
+        Range: '角度',
+        Color: '颜色',
+        Fill: '填充',
+        Stroke: '边框',
+        Rectangle: '长方形',
+        Circle: '圆形',
+        Triangle: '三角形',
+        Bold: '加粗',
+        Italic: '倾斜',
+        Underline: '下横线',
+        Left: '左对齐',
+        Center: '居中',
+        Right: '右对齐',
+        'Text size': '文本大小',
+        Arrow: '箭头',
+        'Arrow-2': '箭头2',
+        'Arrow-3': '箭头3',
+        Value: '值',
+        'Custom icon': '自定义图标',
+        'Gradient transparency': '渐变透明',
+        Blend: '混合',
+        Multiply: '叠加',
+        Tint: '色调',
+        Heart: '心',
+        Bubble: '泡泡',
+        Location: '位置',
+        Polygon: '多变形',
+        'Star-1': '星星1',
+        'Star-2': '星星2',
+        Free: '自由',
+        Straight: '直线',
+      };
+
+      var theme =
+        // default keys and styles
+        {
+          'common.bi.image': '/images/logo-main.png',
+          'common.bisize.width': '115px',
+          'common.bisize.height': '35px',
+          'common.backgroundImage': 'none',
+          'common.backgroundColor': '#fff',
+          'common.border': '0px',
+
+          // header
+          'header.backgroundImage': 'none',
+          'header.backgroundColor': '#151515',
+          'header.border': '0px',
+
+          // load button
+          'loadButton.backgroundColor': '#f5f5f5',
+          'loadButton.border': '1px solid #ddd',
+          'loadButton.color': '#222',
+          'loadButton.fontFamily': 'Microsoft YaHei',
+          'loadButton.fontSize': '13px',
+
+          // download button
+          'downloadButton.backgroundColor': '#5bc0de',
+          'downloadButton.border': '1px solid #5bc0de',
+          'downloadButton.color': '#fff',
+          'downloadButton.fontFamily': 'Microsoft YaHei',
+          'downloadButton.fontSize': '13px',
+
+          // icons default
+          'menu.normalIcon.color': '#8a8a8a',
+          'menu.activeIcon.color': '#555555',
+          'menu.disabledIcon.color': '#434343',
+          'menu.hoverIcon.color': '#e9e9e9',
+          'submenu.normalIcon.color': '#8a8a8a',
+          'submenu.activeIcon.color': '#e9e9e9',
+
+          'menu.iconSize.width': '24px',
+          'menu.iconSize.height': '24px',
+          'submenu.iconSize.width': '32px',
+          'submenu.iconSize.height': '32px',
+
+          // submenu primary color
+          'submenu.backgroundColor': '#1e1e1e',
+          'submenu.partition.color': '#858585',
+
+          // submenu labels
+          'submenu.normalLabel.color': '#858585',
+          'submenu.normalLabel.fontWeight': 'lighter',
+          'submenu.activeLabel.color': '#fff',
+          'submenu.activeLabel.fontWeight': 'lighter',
+
+          // checkbox style
+          'checkbox.border': '1px solid #ccc',
+          'checkbox.backgroundColor': '#fff',
+
+          // rango style
+          'range.pointer.color': '#fff',
+          'range.bar.color': '#666',
+          'range.subbar.color': '#d1d1d1',
+
+          'range.disabledPointer.color': '#414141',
+          'range.disabledBar.color': '#282828',
+          'range.disabledSubbar.color': '#414141',
+
+          'range.value.color': '#fff',
+          'range.value.fontWeight': 'lighter',
+          'range.value.fontSize': '11px',
+          'range.value.border': '1px solid #353535',
+          'range.value.backgroundColor': '#151515',
+          'range.title.color': '#fff',
+          'range.title.fontWeight': 'lighter',
+
+          // colorpicker style
+          'colorpicker.button.border': '1px solid #1e1e1e',
+          'colorpicker.title.color': '#fff',
+        };
+
+      var imageEditor = new tui.ImageEditor(document.querySelector('#tui-image-editor-container'), {
+        includeUI: {
+          locale,
+          theme,
+          // initMenu: 'filter',
+          menuBarPosition: 'right',
+        },
+        // cssMaxWidth: 700,
+        // cssMaxHeight: 500,
+      });
+
+      imageEditor.on('objectAdded', (props) => {
+        console.log(props);
+      });
+
+      window.onresize = function () {
+        imageEditor.ui.resizeEditor();
+      };
+    </script>
+  </body>
+</html>

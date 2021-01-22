@@ -18,6 +18,7 @@ export default {
       text: this._textAction(),
       mask: this._maskAction(),
       draw: this._drawAction(),
+      eraser: this._eraserAction(),
       icon: this._iconAction(),
       filter: this._filterAction(),
     };
@@ -202,6 +203,26 @@ export default {
           this.setBrush({
             color,
           });
+        },
+      },
+      this._commonAction()
+    );
+  },
+
+  /**
+   * Eraser Action
+   * @returns {Object} actions for ui eraser
+   * @private
+   */
+  _eraserAction() {
+    return extend(
+      {
+        setEraserMode: (settings) => {
+          this.stopDrawingMode();
+          this.startDrawingMode('ERASER', settings);
+        },
+        stopEraseringMode: () => {
+          this.stopDrawingMode();
         },
       },
       this._commonAction()

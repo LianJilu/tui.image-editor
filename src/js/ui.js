@@ -14,6 +14,7 @@ import Mask from './ui/mask';
 import Icon from './ui/icon';
 import Draw from './ui/draw';
 import Filter from './ui/filter';
+import Eraser from './ui/eraser';
 import Locale from './ui/locale/locale';
 
 const SUB_UI_COMPONENT = {
@@ -26,6 +27,7 @@ const SUB_UI_COMPONENT = {
   Icon,
   Draw,
   Filter,
+  Eraser,
 };
 
 const BI_EXPRESSION_MINSIZE_WHEN_TOP_POSITION = '1300';
@@ -192,7 +194,18 @@ class Ui {
         },
         locale: {},
         menuIconPath: '',
-        menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'mask', 'filter'],
+        menu: [
+          'crop',
+          'flip',
+          'rotate',
+          'draw',
+          'shape',
+          'icon',
+          'text',
+          'mask',
+          'filter',
+          'eraser',
+        ],
         initMenu: '',
         uiSize: {
           width: '100%',

@@ -142,7 +142,8 @@ export const drawingModes = keyMirror(
   'LINE_DRAWING',
   'TEXT',
   'SHAPE',
-  'ICON'
+  'ICON',
+  'ERASER'
 );
 
 /**
@@ -230,6 +231,12 @@ export const defaultDrawRangeValus = {
   min: 5,
   max: 30,
   value: 12,
+};
+
+export const defaultEraserRangeValues = {
+  min: 5,
+  max: 60,
+  value: 30,
 };
 
 export const defaultShapeStrokeValus = {

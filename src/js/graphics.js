@@ -16,6 +16,7 @@ import Filter from './component/filter';
 import Shape from './component/shape';
 import CropperDrawingMode from './drawingMode/cropper';
 import FreeDrawingMode from './drawingMode/freeDrawing';
+import EraserDrawingMode from './drawingMode/eraser';
 import LineDrawingMode from './drawingMode/lineDrawing';
 import ShapeDrawingMode from './drawingMode/shape';
 import TextDrawingMode from './drawingMode/text';
@@ -894,6 +895,7 @@ class Graphics {
     this._register(this._drawingModeMap, new ShapeDrawingMode());
     this._register(this._drawingModeMap, new TextDrawingMode());
     this._register(this._drawingModeMap, new IconDrawingMode());
+    this._register(this._drawingModeMap, new EraserDrawingMode());
   }
 
   /**
