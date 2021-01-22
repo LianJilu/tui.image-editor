@@ -9,6 +9,7 @@ import Cropper from './component/cropper';
 import Flip from './component/flip';
 import Rotation from './component/rotation';
 import FreeDrawing from './component/freeDrawing';
+import Eraser from './component/eraser';
 import Line from './component/line';
 import Text from './component/text';
 import Icon from './component/icon';
@@ -913,6 +914,7 @@ class Graphics {
     this._register(this._componentMap, new Icon(this));
     this._register(this._componentMap, new Filter(this));
     this._register(this._componentMap, new Shape(this));
+    this._register(this._componentMap, new Eraser(this));
   }
 
   /**

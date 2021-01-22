@@ -48,7 +48,8 @@ export const componentNames = keyMirror(
   'TEXT',
   'ICON',
   'FILTER',
-  'SHAPE'
+  'SHAPE',
+  'ERASER'
 );
 
 /**
