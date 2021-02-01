@@ -47,6 +47,7 @@
         'Delete-all': '删除所有',
         Load: '选择图片',
         Download: '下载图片',
+        Confirm: '确定',
         Sharpen: '锐化',
         Emboss: '浮雕',
         Blur: '模糊',
@@ -192,16 +193,24 @@
         includeUI: {
           locale,
           theme,
-          // initMenu: 'filter',
+          initMenu: 'eraser',
           menuBarPosition: 'right',
         },
         cssMaxWidth: 800,
         cssMaxHeight: 800,
       });
 
+      imageEditor.loadImageFromURL('img/aa.jpg', 'aa').then((res) => {
+        imageEditor.ui.activeMenuEvent();
+      });
+
       imageEditor.on('eraserApply', (data) => {
         console.log(JSON.stringify(data));
         imageEditor.eraserApply('img/aa.jpg');
+      });
+
+      imageEditor.on('confirm', (data) => {
+        console.log(data);
       });
 
       // window.onresize = function () {

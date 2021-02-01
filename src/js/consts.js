@@ -127,6 +127,7 @@ export const eventNames = {
   MOUSE_UP: 'mouseup',
   MOUSE_MOVE: 'mousemove',
   ERASER_APPLY: 'eraserApply',
+  CONFIRM: 'confirm',
   // UNDO/REDO Events
   REDO_STACK_CHANGED: 'redoStackChanged',
   UNDO_STACK_CHANGED: 'undoStackChanged',

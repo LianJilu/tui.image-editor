@@ -299,6 +299,7 @@ class Ui {
     this._menuElement = selector('.tui-image-editor-menu');
     this._subMenuElement = selector('.tui-image-editor-submenu');
     this._buttonElements = {
+      confirm: this._selectedElement.querySelector('.tui-image-editor-confirm-btn'),
       download: this._selectedElement.querySelectorAll('.tui-image-editor-download-btn'),
       load: this._selectedElement.querySelectorAll('.tui-image-editor-load-btn'),
     };
@@ -422,6 +423,22 @@ class Ui {
   }
 
   /**
+   * Add confirm event
+   * @private
+   */
+  _addConfirmEvent() {
+    this.eventHandler.confirm = () => this._actions.main.confirm();
+    this._buttonElements.confirm.addEventListener('click', this.eventHandler.confirm);
+  }
+
+  _removeConfirmEvent() {
+    snippet.forEach(this._buttonElements.confirm, (element) => {
+      element.removeEventListener('click', this.eventHandler.confirm);
+    });
+    this.eventHandler.confirm.removeEventListener('click');
+  }
+
+  /**
    * Add load event
    * @private
    */
@@ -503,6 +520,7 @@ class Ui {
 
     this._addHelpActionEvent();
     this._addDownloadEvent();
+    this._addConfirmEvent();
     this._addMenuEvent();
     this._initMenu();
     this._initMenuEvent = true;
@@ -515,6 +533,7 @@ class Ui {
   _removeUiEvent() {
     this._removeHelpActionEvent();
     this._removeDownloadEvent();
+    this._removeConfirmEvent();
     this._removeLoadEvent();
     this._removeMainMenuEvent();
   }

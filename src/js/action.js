@@ -1,6 +1,7 @@
 import { extend } from 'tui-code-snippet';
 import { isSupportFileApi, base64ToBlob, toInteger } from './util';
 import Imagetracer from './helper/imagetracer';
+import { eventNames } from './consts';
 
 export default {
   /**
@@ -127,6 +128,10 @@ export default {
             w = window.open();
             w.document.body.innerHTML = `<img src='${dataURL}'>`;
           }
+        },
+        confirm: () => {
+          const dataURL = this.toDataURL();
+          this.fire(eventNames.CONFIRM, dataURL);
         },
       },
       this._commonAction()

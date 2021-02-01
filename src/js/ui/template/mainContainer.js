@@ -20,6 +20,9 @@ export default ({
                 <button class="tui-image-editor-download-btn" style="${downloadButtonStyle}">
                     ${locale.localize('Download')}
                 </button>
+                <button class="tui-image-editor-confirm-btn" style="${downloadButtonStyle}">
+                    ${locale.localize('Confirm')}
+                </button>
             </div>
         </div>
         <div class="tui-image-editor-main">
