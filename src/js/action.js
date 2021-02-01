@@ -224,6 +224,9 @@ export default {
         stopEraseringMode: () => {
           this.stopDrawingMode();
         },
+        applyEraser: () => {
+          this.applyEraser();
+        },
       },
       this._commonAction()
     );

@@ -9,7 +9,6 @@ import Cropper from './component/cropper';
 import Flip from './component/flip';
 import Rotation from './component/rotation';
 import FreeDrawing from './component/freeDrawing';
-import Eraser from './component/eraser';
 import Line from './component/line';
 import Text from './component/text';
 import Icon from './component/icon';
@@ -28,6 +27,7 @@ import {
   eventNames as events,
   drawingModes,
   fObjectOptions,
+  objectType,
 } from './consts';
 import {
   makeSelectionUndoData,
@@ -914,7 +914,6 @@ class Graphics {
     this._register(this._componentMap, new Icon(this));
     this._register(this._componentMap, new Filter(this));
     this._register(this._componentMap, new Shape(this));
-    this._register(this._componentMap, new Eraser(this));
   }
 
   /**
@@ -1034,6 +1033,11 @@ class Graphics {
     const obj = fEvent.target;
     if (obj.isType('cropzone')) {
       return;
+    }
+
+    if (this.getDrawingMode() === drawingModes.ERASER) {
+      obj.type = objectType.ERASER;
+      obj.points = [...obj.canvas.freeDrawingBrush._points];
     }
 
     this._addFabricObject(obj);

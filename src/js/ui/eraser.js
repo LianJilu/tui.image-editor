@@ -37,10 +37,11 @@ class Eraser extends Submenu {
         },
         defaultEraserRangeValues
       ),
+      apply: this.selector('.tie-eraser-button .apply'),
     };
 
     this.color = this._els.eraserColorPicker.color;
-    this.width = this._els.eraserRange.vla;
+    this.width = this._els.eraserRange.value;
   }
 
   /**
@@ -63,6 +64,7 @@ class Eraser extends Submenu {
     this.actions = actions;
     this._els.eraserColorPicker.on('change', this._changeEraserColor.bind(this));
     this._els.eraserRange.on('change', this._changeEraserRange.bind(this));
+    this._els.apply.addEventListener('click', this._apply.bind(this));
   }
 
   /**
@@ -72,6 +74,7 @@ class Eraser extends Submenu {
   _removeEvent() {
     this._els.eraserColorPicker.off();
     this._els.eraserRange.off();
+    this._els.apply.removeEventListener('click');
   }
 
   /**
@@ -117,6 +120,14 @@ class Eraser extends Submenu {
   _changeEraserRange(value) {
     this.width = value;
     this.setEraserMode();
+  }
+
+  /**
+   * Apply Eraser
+   * @private
+   */
+  _apply() {
+    this.actions.applyEraser();
   }
 }
 

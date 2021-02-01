@@ -9,7 +9,13 @@ import action from './action';
 import commandFactory from './factory/command';
 import Graphics from './graphics';
 import { sendHostName, Promise } from './util';
-import { eventNames as events, commandNames as commands, keyCodes, rejectMessages } from './consts';
+import {
+  eventNames as events,
+  commandNames as commands,
+  keyCodes,
+  rejectMessages,
+  objectType,
+} from './consts';
 import { makeSelectionUndoData, makeSelectionUndoDatum } from './helper/selectionModifyHelper';
 
 const { isUndefined, forEach, CustomEvents } = snippet;
@@ -757,6 +763,25 @@ class ImageEditor {
    */
   setCropzoneRect(mode) {
     this._graphics.setCropzoneRect(mode);
+  }
+
+  /**
+   * apply eraser
+   */
+  applyEraser() {
+    const objects = this._graphics.getObjects();
+    const data = [];
+
+    objects.forEach((obj) => {
+      if (obj.type === objectType.ERASER) {
+        data.push({
+          width: obj.strokeWidth,
+          path: obj.points,
+        });
+      }
+    });
+
+    this.fire(events.ERASER_APPLY, data);
   }
 
   /**

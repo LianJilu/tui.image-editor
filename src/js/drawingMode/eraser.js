@@ -19,7 +19,7 @@ class EraserDrawingMode extends DrawingMode {
    * @override
    */
   start(graphics, options) {
-    const eraser = graphics.getComponent(components.ERASER);
+    const eraser = graphics.getComponent(components.FREE_DRAWING);
     eraser.start(options);
   }
 
@@ -29,7 +29,7 @@ class EraserDrawingMode extends DrawingMode {
    * @override
    */
   end(graphics) {
-    const eraser = graphics.getComponent(components.ERASER);
+    const eraser = graphics.getComponent(components.FREE_DRAWING);
     eraser.end();
   }
 }

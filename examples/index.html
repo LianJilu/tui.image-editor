@@ -195,12 +195,12 @@
           // initMenu: 'filter',
           menuBarPosition: 'right',
         },
-        // cssMaxWidth: 700,
-        // cssMaxHeight: 500,
+        cssMaxWidth: 800,
+        cssMaxHeight: 800,
       });
 
-      imageEditor.on('objectAdded', (props) => {
-        console.log(props);
+      imageEditor.on('eraserApply', (data) => {
+        console.log(JSON.stringify(data));
       });
 
       window.onresize = function () {

@@ -125,11 +125,16 @@ export const eventNames = {
   MOUSE_DOWN: 'mousedown',
   MOUSE_UP: 'mouseup',
   MOUSE_MOVE: 'mousemove',
+  ERASER_APPLY: 'eraserApply',
   // UNDO/REDO Events
   REDO_STACK_CHANGED: 'redoStackChanged',
   UNDO_STACK_CHANGED: 'undoStackChanged',
   SELECTION_CLEARED: 'selectionCleared',
   SELECTION_CREATED: 'selectionCreated',
+};
+
+export const objectType = {
+  ERASER: 'eraser',
 };
 
 /**
