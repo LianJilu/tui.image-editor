@@ -201,11 +201,12 @@
 
       imageEditor.on('eraserApply', (data) => {
         console.log(JSON.stringify(data));
+        imageEditor.eraserApply('img/aa.jpg');
       });
 
-      window.onresize = function () {
-        imageEditor.ui.resizeEditor();
-      };
+      // window.onresize = function () {
+      //   imageEditor.ui.resizeEditor();
+      // };
     </script>
   </body>
 </html>

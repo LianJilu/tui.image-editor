@@ -101,6 +101,7 @@ export const commandNames = {
   SET_OBJECT_PROPERTIES: 'setObjectProperties',
   SET_OBJECT_POSITION: 'setObjectPosition',
   CHANGE_SELECTION: 'changeSelection',
+  APPLY_ERASER: 'applyEraser',
 };
 
 /**

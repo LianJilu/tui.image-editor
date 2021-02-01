@@ -15,6 +15,7 @@ import {
   keyCodes,
   rejectMessages,
   objectType,
+  commandNames,
 } from './consts';
 import { makeSelectionUndoData, makeSelectionUndoDatum } from './helper/selectionModifyHelper';
 
@@ -782,6 +783,14 @@ class ImageEditor {
     });
 
     this.fire(events.ERASER_APPLY, data);
+  }
+
+  /**
+   * apply eraser callback
+   * @param {string} imgUrl - img url
+   */
+  eraserApply(imgUrl) {
+    this.execute(commandNames.APPLY_ERASER, imgUrl, imgUrl, this);
   }
 
   /**

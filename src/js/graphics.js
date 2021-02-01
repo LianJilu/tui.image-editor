@@ -1035,11 +1035,6 @@ class Graphics {
       return;
     }
 
-    if (this.getDrawingMode() === drawingModes.ERASER) {
-      obj.type = objectType.ERASER;
-      obj.points = [...obj.canvas.freeDrawingBrush._points];
-    }
-
     this._addFabricObject(obj);
   }
 
@@ -1161,6 +1156,13 @@ class Graphics {
     );
 
     const params = this.createObjectProperties(obj.path);
+
+    if (this.getDrawingMode() === drawingModes.ERASER) {
+      params.type = objectType.ERASER;
+      const fObject = this.getObject(params.id);
+      fObject.type = objectType.ERASER;
+      fObject.points = [...fObject.canvas.freeDrawingBrush._points];
+    }
 
     this.fire(events.ADD_OBJECT, params);
   }

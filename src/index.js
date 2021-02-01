@@ -23,5 +23,6 @@ import './js/command/rotate';
 import './js/command/setObjectProperties';
 import './js/command/setObjectPosition';
 import './js/command/changeSelection';
+import './js/command/applyEraser';
 
 module.exports = ImageEditor;
