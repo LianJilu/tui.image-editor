@@ -62,9 +62,16 @@ class Eraser extends Submenu {
    */
   addEvent(actions) {
     this.actions = actions;
+
+    const apply = this._apply.bind(this);
+
+    this.eventHandler = {
+      apply,
+    };
+
     this._els.eraserColorPicker.on('change', this._changeEraserColor.bind(this));
     this._els.eraserRange.on('change', this._changeEraserRange.bind(this));
-    this._els.apply.addEventListener('click', this._apply.bind(this));
+    this._els.apply.addEventListener('click', apply);
   }
 
   /**
@@ -74,7 +81,7 @@ class Eraser extends Submenu {
   _removeEvent() {
     this._els.eraserColorPicker.off();
     this._els.eraserRange.off();
-    this._els.apply.removeEventListener('click');
+    this._els.apply.removeEventListener('click', this.eventHandler.apply);
   }
 
   /**

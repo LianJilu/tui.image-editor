@@ -432,10 +432,7 @@ class Ui {
   }
 
   _removeConfirmEvent() {
-    snippet.forEach(this._buttonElements.confirm, (element) => {
-      element.removeEventListener('click', this.eventHandler.confirm);
-    });
-    this.eventHandler.confirm.removeEventListener('click');
+    this._buttonElements.confirm.removeEventListener('click', this.eventHandler.confirm);
   }
 
   /**
