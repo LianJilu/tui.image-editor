@@ -790,7 +790,7 @@ class ImageEditor {
    * @param {string} imgUrl - img url
    */
   eraserApply(imgUrl) {
-    this.execute(commandNames.APPLY_ERASER, imgUrl, imgUrl, this);
+    this.execute(commandNames.APPLY_ERASER, imgUrl, imgUrl);
   }
 
   /**

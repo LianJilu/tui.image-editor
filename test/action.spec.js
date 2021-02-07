@@ -276,6 +276,29 @@ describe('Ui', () => {
     });
   });
 
+  describe('eraserActtion', () => {
+    let eraserAction, expected;
+
+    beforeEach(() => {
+      eraserAction = actions.eraser;
+    });
+
+    it('startDrawingMode("ERASER") API should be executed When the setEraserMode() action occurs', () => {
+      spyOn(imageEditorMock, 'startDrawingMode');
+      eraserAction.setEraserMode();
+
+      expected = imageEditorMock.startDrawingMode.calls.mostRecent().args[0];
+      expect(expected).toBe('ERASER');
+    });
+
+    it('applyEraser() API should be executed When the apply action occurs', () => {
+      spyOn(imageEditorMock, 'applyEraser');
+      eraserAction.applyEraser();
+
+      expect(imageEditorMock.applyEraser).toHaveBeenCalled();
+    });
+  });
+
   describe('iconAction', () => {
     let iconAction;
 
@@ -328,6 +351,7 @@ describe('Ui', () => {
         'draw',
         'icon',
         'filter',
+        'eraser',
       ];
       snippet.forEach(submenus, (submenu) => {
         expect(actions[submenu].modeChange).toBeDefined();
@@ -475,6 +499,17 @@ describe('Ui', () => {
 
         expect(imageEditorMock.ui.changeMenu.calls.mostRecent().args[0]).toBe('icon');
         expect(imageEditorMock.ui.icon.setIconPickerColor).toHaveBeenCalled();
+      });
+
+      it('If the target of objectActivated is eraser and the existing menu is not eraser, the menu should be changed to icon.', () => {
+        imageEditorMock.ui.submenu = 'crop';
+        spyOn(imageEditorMock.ui, 'changeMenu');
+        imageEditorMock.fire('objectActivated', {
+          id: 1,
+          type: 'eraser',
+        });
+
+        expect(imageEditorMock.ui.changeMenu.calls.mostRecent().args[0]).toBe('eraser');
       });
     });
 

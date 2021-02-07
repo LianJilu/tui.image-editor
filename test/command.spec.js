@@ -559,4 +559,54 @@ describe('commandFactory', () => {
         });
     });
   });
+
+  describe('applyEraserCommand', () => {
+    const imageURL = 'base/test/fixtures/sampleImage.jpg';
+
+    beforeEach(() => {
+      graphics.setCanvasImage('', null);
+    });
+
+    it('should load new image', (done) => {
+      invoker.execute(commands.APPLY_ERASER, graphics, imageURL, imageURL).then(() => {
+        expect(graphics.getImageName()).toEqual(imageURL);
+        expect(graphics.getCanvasImage().getSrc()).toContain(imageURL);
+        done();
+      });
+    });
+
+    it('normal objects should be exist', (done) => {
+      const objCircle = new fabric.Object({
+        type: 'circle',
+      });
+
+      invoker.execute(commands.ADD_OBJECT, graphics, objCircle).then(() => {
+        invoker.execute(commands.APPLY_ERASER, graphics, imageURL, imageURL).then(() => {
+          expect(graphics.contains(objCircle));
+          done();
+        });
+      });
+    });
+
+    it('"undo()" should restore to prev image', (done) => {
+      const newImageURL = 'base/test/fixtures/TOAST%20UI%20Component.png';
+
+      invoker
+        .execute(commands.APPLY_ERASER, graphics, 'image', imageURL)
+        .then(() => {
+          return invoker.execute(commands.APPLY_ERASER, graphics, 'newImage', newImageURL);
+        })
+        .then(() => {
+          expect(graphics.getImageName()).toBe('newImage');
+          expect(graphics.getCanvasImage().getSrc()).toContain(newImageURL);
+
+          return invoker.undo();
+        })
+        .then(() => {
+          expect(graphics.getImageName()).toEqual('image');
+          expect(graphics.getCanvasImage().getSrc()).toContain(imageURL);
+          done();
+        });
+    });
+  });
 });

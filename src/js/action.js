@@ -474,6 +474,12 @@ export default {
             this.ui.changeMenu('icon', false, false);
           }
           this.ui.icon.setIconPickerColor(obj.fill);
+        } else if (obj.type === 'eraser') {
+          if (this.ui.submenu !== 'eraser') {
+            this.ui.changeMenu('eraser', false, false);
+            this.stopDrawingMode();
+            this.changeSelectableAll(true);
+          }
         }
       },
       /* eslint-enable complexity */
